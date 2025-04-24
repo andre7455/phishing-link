@@ -32,7 +32,7 @@
 <body>
   <div class="construction blinking">Under construction</div>
   <p>Come back later!</p>
-  <img src="assets/gif/giphy-downsized-large.gif" alt="Under Construction GIF">
+  <img src="./assets/9XryZQt.jpeg" alt="funny meme">
   <p>Last updated: april 2025</p>
 </body>
 </html>
