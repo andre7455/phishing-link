@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile.yaml
+    ports:
+      - "81:80"
+    volumes:
+      - ./website:/var/www/html/
