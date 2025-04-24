@@ -1,15 +1,38 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under construction</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <title>Under Construction</title>
+  <style>
+    body {
+      background: url("https://www.w3schools.com/images/pattern.png");
+      color: #ff0000;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #000000;
+    }
+    .construction {
+      font-size: 48px;
+      font-weight: bold;
+      text-shadow: 2px 2px #FFFF00;
+    }
+    .blinking {
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+    img {
+      margin-top: 20px;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>This page is under construction, please come back later</h1>
-    </header>
+  <div class="construction blinking">🚧 Under Construction 🚧</div>
+  <p>Come back later!</p>
+  <img src="https://www.animatedimages.org/data/media/163/animated-under-construction-image-0013.gif" alt="Under Construction GIF">
+  <p>Last updated: July 2004</p>
 </body>
 </html>
