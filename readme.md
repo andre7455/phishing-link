@@ -14,8 +14,13 @@ To be completely honest, I don't really know where I want to go with this page. 
 
 One of my big goals here is to have a showcase of my coding skills, and making a desktop env for in the browser would be very cool, NGL. I can put my GitHub in an iframe in there and I will do some cool, unique things. But the creativity needed is not really my thing. So along the way, we’ll see where I end up. I don't think I will do anything CMS-like because, well, let's face it—securing that might be a pain. Although it’s also a fun challenge... maybe I’ll let CTFs run on it, idk.
 
+## current task
+ - make a script that gets and injects some but not all env data into a file so php can read it 
+
 ## What I Have on My TODO for This Page
 
 - Automated testing  
 - Blog-like capability  
 - To be decided
+
+
