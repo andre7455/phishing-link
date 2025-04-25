@@ -1,9 +1,11 @@
 version: "3.7"
 services:
-  app:
+  website:
     build:
       dockerfile: Dockerfile
     ports:
       - "81:80"
     volumes:
       - ./website:/var/www/html/
+    restart: unless-stopped
+  
