@@ -1,0 +1,37 @@
+# .github/workflows/test-docker.yml
+name: Docker CI Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docker-test:
+    name: docker-deployment test
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker container
+      run: echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker-compose build
+
+    - name: Run container in background
+      run: echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker-compose up -d
+
+    - name: Wait for service to be ready
+      run: |
+        for i in {1..30}; do
+          if curl -s http://localhost:81 > /dev/null; then
+            echo "Service is up"
+            exit 0
+          fi
+          echo "Waiting for service..."
+          sleep 2
+        done
+        echo "Service did not start on port 81"
+        docker-compose logs
+        exit 1
+    - name: Shutdown containers
+      if: always()
+      run: echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker-compose down
