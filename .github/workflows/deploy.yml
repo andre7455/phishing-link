@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-website:
+    name: deployment
+    runs-on: self-hosted
+    steps:
+      - name: Send webhook with curl
+        run: |
+          curl -X POST ${{ secrets.webhookurl }} \
+            -H "Content-Type: application/json" \
+            -d '{"event":"deploy","branch":"main"}'
