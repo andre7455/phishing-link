@@ -1,0 +1,41 @@
+# .github/workflows/test-docker.yml
+name: Docker CI Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docker-test:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Compose
+      run: sudo apt-get update && sudo apt-get install docker-compose -y
+
+    - name: Build Docker container
+      run: docker-compose build
+
+    - name: Run container in background
+      run: docker-compose up -d
+
+    - name: Wait for service to be ready
+      run: |
+        for i in {1..30}; do
+          if curl -s http://localhost:81 > /dev/null; then
+            echo "Service is up"
+            exit 0
+          fi
+          echo "Waiting for service..."
+          sleep 2
+        done
+        echo "Service did not start on port 81"
+        docker-compose logs
+        exit 1
+
+    - name: Shutdown containers
+      if: always()
+      run: docker-compose down
