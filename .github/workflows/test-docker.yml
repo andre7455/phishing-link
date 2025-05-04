@@ -1,9 +1,6 @@
 jobs:
   docker-test:
     runs-on: self-hosted
-    environment: # Add a dummy environment
-      name: test-environment
-      url: https://example.com
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
