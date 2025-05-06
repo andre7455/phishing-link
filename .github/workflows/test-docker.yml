@@ -1,5 +1,5 @@
 # .github/workflows/test-docker.yml
-name: Docker CI Test
+name: Docker build test
 
 on:
   push:
@@ -33,5 +33,7 @@ jobs:
         docker-compose logs
         exit 1
     - name: Shutdown containers
+      run: |
+        echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker stop $(docker ps -aq)
+        echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker system prune -af --volumes
       if: always()
-      run: echo "${{ secrets.SUDORUNNERPASSWORD }}" | sudo -S docker-compose down
