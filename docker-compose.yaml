@@ -9,4 +9,21 @@ services:
     volumes:
       - ./website:/var/www/html/
     restart: unless-stopped
-  
+    networks:
+      - phishingDB
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "ohHnP9RaU8gRKWi@FvwaLsFGfUieiSy"
+      MYSQL_DATABASE: phishingDB
+      MYSQL_USER: evKqe7NcT#wtnCuTT&v5!L7eWbCqqH^S
+      MYSQL_PASSWORD: 6v7HABYQKRjhbnJvuBa6ZvU*UayvDTBM
+    volumes:
+      - ./phishingDB:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - phishingDB
+networks:
+  phishingDB:
+    driver: bridge
