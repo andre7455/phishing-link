@@ -1,3 +1,2 @@
 <?php
-include './view/temp.php';
-?>
+#todo make blog lol
