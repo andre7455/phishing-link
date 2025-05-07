@@ -1,5 +1,5 @@
 <?php
-#todo: add error tracking
+#TODO: add error tracking
 function errorCheckRouter($error) {
     #add error trackin
 }
