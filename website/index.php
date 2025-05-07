@@ -1,2 +1,2 @@
 <?php
-#todo make blog lol
+#TODO make blog lol

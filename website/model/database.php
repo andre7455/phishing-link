@@ -1,7 +1,7 @@
 <?php
 include './errorTracking.php';
 
-#todo: anonymize the credentials
+#TODO anonymize the credentials
 #why i cant do this? i didnt figure out how to test this locally yet (env variables i know but annoying)
 #github secrets? idk with my current deployment infrastructure
 runSQLQuery($sql);{
