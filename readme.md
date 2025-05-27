@@ -3,6 +3,10 @@
 Since you're here, you're probably wondering why this site is open-source.  
 Well, I am making this site as a showcase of some of my capabilities as a programmer. However, my preference is definitely focused on the backend. By this I mean cloud hosting and networking.
 
+# Step plan
+This page will at first be a blog while im working on the desktop env.
+That blog will be a progam on the desktop so it will be structuered like that.
+
 ## Deployment Strategy
 
 This site is CI/CD, for example. However, I have implemented this on my own end with a webhook integration—because of reasons.  
@@ -20,7 +24,6 @@ One of my big goals here is to have a showcase of my coding skills, and making a
 ## What I Have on My TODO for This Page
 
 - Automated testing  
-- Blog-like capability  
+- Blog-like capability (i will make it a today i leaned page)
 - To be decided
-
 
