@@ -1,6 +1,6 @@
 <?php
-include './view/menu/header.php';
-include './view/menu/footer.php';
+include './view/components/header.php';
+include './view/components/footer.php';
 
 customHeader('Under Construction', '../assets/css/initialPage.css');
 echo '
