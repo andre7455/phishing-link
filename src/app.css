@@ -11,3 +11,74 @@
     @apply min-h-screen;
   }
 }
+
+@layer components {
+  .terminal-intro-screen {
+    @apply flex min-h-screen bg-black p-6 font-mono text-2xl text-white;
+    @apply sm:items-center sm:justify-center sm:text-4xl;
+  }
+
+  .terminal-intro-content {
+    @apply mt-8 text-center sm:mt-0;
+  }
+
+  .terminal-typed-line {
+    @apply mx-auto flex min-w-[12ch] items-baseline whitespace-nowrap text-left;
+  }
+
+  .terminal-cursor {
+    @apply ml-1 inline-block h-7 w-3 animate-blink bg-white align-[-3px];
+    @apply sm:h-10 sm:w-4;
+  }
+
+  .terminal-continue-prompt {
+    @apply mt-8 min-h-6 text-base transition-opacity duration-300;
+    @apply sm:min-h-8 sm:text-2xl;
+  }
+
+  .desktop-page {
+    @apply flex min-h-screen flex-col overflow-hidden bg-[#008080] font-sans text-white;
+  }
+
+  .desktop-workspace {
+    @apply min-h-0 flex-1 p-4;
+  }
+
+  .desktop-shortcut {
+    @apply flex w-24 flex-col items-center gap-2 rounded-sm border border-transparent p-2;
+    @apply text-center text-sm text-white outline-none;
+    @apply hover:border-white/40 hover:bg-white/10;
+    @apply focus:border-white focus:bg-blue-700/60;
+  }
+
+  .desktop-shortcut-icon {
+    @apply flex h-12 w-12 items-center justify-center border-2 border-white bg-[#c0c0c0];
+    @apply text-3xl text-black shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+  }
+
+  .desktop-shortcut-label {
+    @apply max-w-full break-words px-1 leading-tight [text-shadow:1px_1px_#000];
+  }
+
+  .start-menu-bar {
+    @apply flex h-11 items-center gap-2 border-t-2 border-white bg-[#c0c0c0] px-1;
+    @apply text-sm text-black shadow-[inset_0_1px_#dfdfdf];
+  }
+
+  .start-button {
+    @apply flex h-8 items-center gap-2 border-2 border-black bg-[#c0c0c0] px-3 font-bold;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+    @apply active:translate-y-px active:shadow-[inset_1px_1px_#808080];
+  }
+
+  .taskbar-spacer {
+    @apply h-8 min-w-0 flex-1 border border-[#808080] bg-[#b8b8b8];
+    @apply shadow-[inset_1px_1px_#808080,inset_-1px_-1px_#dfdfdf];
+  }
+
+  .taskbar-clock {
+    @apply flex h-9 min-w-24 flex-col items-center justify-center border border-[#808080];
+    @apply px-3 text-xs leading-tight;
+    @apply shadow-[inset_1px_1px_#808080,inset_-1px_-1px_#fff];
+  }
+}

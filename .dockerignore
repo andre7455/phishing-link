@@ -7,4 +7,6 @@ dist
 Dockerfile
 .dockerignore
 website
+tests
+/src/**/*.test.js
 /assets

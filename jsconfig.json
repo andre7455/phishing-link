@@ -10,7 +10,8 @@
     "src/**/*.svelte",
     "src/**/*.d.ts",
     "vite.config.js",
-    "vitest.config.js"
+    "vitest.config.js",
+    "tests/**/*.js"
   ],
   "exclude": ["node_modules/*", "dist/*"]
 }

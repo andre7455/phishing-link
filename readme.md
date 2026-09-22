@@ -34,6 +34,21 @@ http://localhost:5173
 
 Use this while working on the Svelte/Tailwind frontend. You do **not** need to run `docker compose up --build` after every change.
 
+## AI-assisted development
+
+This repo includes `AGENTS.md` as guidance for AI coding agents. Future AI changes should follow that file, keep the quality commands passing, and add or update tests for every new feature or behavior change.
+
+## Project structure
+
+```txt
+src/
+  components/  Reusable Svelte components
+  routes/      Top-level page/route components
+  App.svelte   App shell
+  main.js      Browser entry point
+tests/         Vitest test files, excluded from Docker builds
+```
+
 ## Quality checks
 
 Run unit tests once:
