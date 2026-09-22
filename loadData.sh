@@ -1,1 +1,0 @@
-#make a script here to run on docker create that makes an .env file for php
