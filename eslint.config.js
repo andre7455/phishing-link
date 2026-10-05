@@ -9,6 +9,12 @@ export default [
     ignores: ['dist/**', 'node_modules/**', '.svelte-kit/**', 'coverage/**'],
   },
   {
+    files: ['src/components/ShortcutContent.svelte'],
+    rules: {
+      'svelte/no-at-html-tags': 'off',
+    },
+  },
+  {
     files: ['**/*.{js,svelte}'],
     languageOptions: {
       ecmaVersion: 'latest',

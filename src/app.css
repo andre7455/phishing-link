@@ -36,33 +36,142 @@
     @apply sm:min-h-8 sm:text-2xl;
   }
 
+  .home-desktop-shell {
+    @apply hidden sm:block;
+  }
+
+  .home-mobile-shell {
+    @apply block sm:hidden;
+  }
+
   .desktop-page {
     @apply flex min-h-screen flex-col overflow-hidden bg-[#008080] font-sans text-white;
   }
 
   .desktop-workspace {
-    @apply min-h-0 flex-1 p-4;
+    @apply relative min-h-0 flex-1 overflow-hidden p-4;
   }
 
   .desktop-shortcut {
-    @apply flex w-24 flex-col items-center gap-2 rounded-sm border border-transparent p-2;
-    @apply text-center text-sm text-white outline-none;
+    @apply absolute flex w-24 cursor-default select-none flex-col items-center gap-2;
+    @apply rounded-sm border border-transparent p-2 text-center text-sm text-white outline-none;
     @apply hover:border-white/40 hover:bg-white/10;
     @apply focus:border-white focus:bg-blue-700/60;
   }
 
   .desktop-shortcut-icon {
-    @apply flex h-12 w-12 items-center justify-center border-2 border-white bg-[#c0c0c0];
+    @apply flex h-12 w-12 items-center justify-center overflow-hidden border-2 border-white bg-[#c0c0c0];
     @apply text-3xl text-black shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+  }
+
+  .shortcut-icon-image {
+    @apply h-full w-full object-cover;
   }
 
   .desktop-shortcut-label {
     @apply max-w-full break-words px-1 leading-tight [text-shadow:1px_1px_#000];
   }
 
+  .desktop-frame {
+    @apply absolute left-2 top-2 flex max-h-[calc(100%-1rem)] max-w-[calc(100%-1rem)];
+    @apply flex-col border-2 border-black bg-[#c0c0c0] text-black;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080,4px_4px_0_rgb(0_0_0_/_0.35)];
+    @apply sm:left-32 sm:top-20 sm:max-h-[calc(100%-6rem)] sm:max-w-[calc(100%-10rem)];
+  }
+
+  .desktop-frame-fullscreen {
+    @apply inset-0 h-full max-h-full w-full max-w-full shadow-none;
+  }
+
+  .desktop-frame-titlebar {
+    @apply m-1 flex h-8 items-center justify-between bg-[#000080] px-2 text-white;
+  }
+
+  .desktop-frame-title {
+    @apply min-w-0 truncate text-sm font-bold;
+  }
+
+  .desktop-frame-actions {
+    @apply ml-2 flex shrink-0 gap-1;
+  }
+
+  .desktop-frame-action {
+    @apply flex h-6 w-6 items-center justify-center border-2 border-black bg-[#c0c0c0];
+    @apply text-base font-bold leading-none text-black;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+  }
+
+  .desktop-frame-body {
+    @apply m-1 mt-0 min-h-0 flex-1 overflow-auto border-2 border-black bg-white;
+  }
+
+  .shortcut-content {
+    @apply h-full overflow-auto bg-white p-4 text-left font-sans text-sm leading-relaxed text-black;
+  }
+
+  .shortcut-content h1 {
+    @apply mb-4 text-2xl font-bold;
+  }
+
+  .shortcut-content h2 {
+    @apply mb-3 mt-5 text-xl font-bold;
+  }
+
+  .shortcut-content p {
+    @apply mb-3;
+  }
+
+  .shortcut-content a {
+    @apply text-blue-700 underline;
+  }
+
+  .shortcut-content img {
+    @apply my-4 max-w-full border border-black;
+  }
+
+  .shortcut-content code {
+    @apply bg-black/10 px-1 font-mono;
+  }
+
+  .shortcut-content pre {
+    @apply mb-4 overflow-auto bg-black/10 p-3;
+  }
+
+  .desktop-frame-resize-handle {
+    @apply absolute bottom-0 right-0 h-4 w-4 cursor-nwse-resize bg-[#c0c0c0];
+    @apply border-l border-t border-[#808080];
+  }
+
+  .desktop-frame-resize-handle-hidden {
+    @apply hidden;
+  }
+
   .start-menu-bar {
-    @apply flex h-11 items-center gap-2 border-t-2 border-white bg-[#c0c0c0] px-1;
+    @apply relative flex h-11 items-center gap-2 border-t-2 border-white bg-[#c0c0c0] px-1;
     @apply text-sm text-black shadow-[inset_0_1px_#dfdfdf];
+  }
+
+  .start-menu-panel {
+    @apply absolute bottom-11 left-0 z-20 flex w-64 border-2 border-black bg-[#c0c0c0];
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080,4px_4px_0_rgb(0_0_0_/_0.35)];
+  }
+
+  .start-menu-header {
+    @apply flex w-9 items-end justify-center bg-[#000080] pb-3 text-sm font-bold text-white;
+    @apply [writing-mode:vertical-rl] [transform:rotate(180deg)];
+  }
+
+  .start-menu-items {
+    @apply min-w-0 flex-1 p-1;
+  }
+
+  .start-menu-item {
+    @apply flex w-full items-center gap-3 p-2 text-left outline-none;
+    @apply hover:bg-[#000080] hover:text-white focus:bg-[#000080] focus:text-white;
+  }
+
+  .start-menu-item-icon {
+    @apply h-8 w-8 border border-black object-cover;
   }
 
   .start-button {
@@ -80,5 +189,65 @@
     @apply flex h-9 min-w-24 flex-col items-center justify-center border border-[#808080];
     @apply px-3 text-xs leading-tight;
     @apply shadow-[inset_1px_1px_#808080,inset_-1px_-1px_#fff];
+  }
+
+  .mobile-home {
+    @apply flex min-h-screen flex-col overflow-hidden bg-[#1d2b16] font-sans text-[#d7ffd0];
+  }
+
+  .mobile-status-bar {
+    @apply flex h-7 items-center justify-between bg-gradient-to-b from-[#263b1d] to-[#111b0d];
+    @apply border-b border-black px-2 text-xs text-[#d7ffd0];
+  }
+
+  .mobile-screen {
+    @apply flex min-h-0 flex-1 flex-col bg-gradient-to-b from-[#263f1c] via-[#162611] to-[#071006];
+    @apply px-4 py-5;
+  }
+
+  .mobile-clock {
+    @apply mt-2 text-center text-5xl font-light tracking-tight text-white;
+    @apply [text-shadow:0_2px_4px_rgb(0_0_0_/_0.7)];
+  }
+
+  .mobile-shortcut-grid {
+    @apply mt-10 grid grid-cols-4 gap-x-3 gap-y-6;
+  }
+
+  .mobile-shortcut-button {
+    @apply flex flex-col items-center gap-2 rounded p-1 text-xs text-white outline-none;
+    @apply active:bg-white/10 focus:bg-white/10;
+  }
+
+  .mobile-shortcut-icon {
+    @apply flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-white/20;
+    @apply bg-gradient-to-b from-[#6f8f2a] to-[#263f1c] text-2xl text-white;
+    @apply shadow-[inset_0_1px_rgb(255_255_255_/_0.35),0_2px_4px_rgb(0_0_0_/_0.5)];
+  }
+
+  .mobile-shortcut-label {
+    @apply max-w-full break-words text-center leading-tight;
+  }
+
+  .mobile-fullscreen-app {
+    @apply flex min-h-0 flex-1 flex-col overflow-hidden rounded border border-black bg-white;
+  }
+
+  .mobile-app-titlebar {
+    @apply flex h-8 items-center bg-gradient-to-b from-[#3f5f2a] to-[#172712] px-3;
+    @apply text-sm font-bold text-white;
+  }
+
+  .mobile-app-frame {
+    @apply min-h-0 flex-1 border-0 bg-white;
+  }
+
+  .mobile-nav-bar {
+    @apply grid h-12 grid-cols-3 border-t border-black bg-gradient-to-b from-[#1f1f1f] to-[#050505];
+  }
+
+  .mobile-nav-button {
+    @apply flex items-center justify-center border-x border-white/5 text-2xl text-[#d7ffd0];
+    @apply active:bg-white/10;
   }
 }

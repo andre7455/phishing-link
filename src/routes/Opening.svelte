@@ -1,51 +1,67 @@
 <script>
   import { onMount } from 'svelte';
-  import Desktop from './Desktop.svelte';
+  import Home from './Home.svelte';
 
   const welcomeMessage = 'Hey, Welcome';
   const typeDelayMs = 90;
   const continuePromptDelayMs = 750;
+  const startupCookieName = 'portfolioStartupSeen';
+  const startupCookieValue = 'true';
 
   let typedMessage = '';
   let isContinuePromptVisible = false;
   let isIntroComplete = false;
 
+  const hasStartupCookie = () => document.cookie
+    .split('; ')
+    .some((cookie) => cookie === `${startupCookieName}=${startupCookieValue}`);
+
+  const setStartupCookie = () => {
+    document.cookie = `${startupCookieName}=${startupCookieValue}; max-age=31536000; path=/; SameSite=Lax`;
+  };
+
   onMount(() => {
+    if (hasStartupCookie()) {
+      isIntroComplete = true;
+      return undefined;
+    }
+
     let characterIndex = 0;
     /** @type {number | undefined} */
     let continuePromptTimer;
 
     const finishIntro = () => {
       if (isContinuePromptVisible) {
+        setStartupCookie();
         isIntroComplete = true;
       }
     };
 
-    const typeTimer = window.setInterval(() => {
+    const typeTimer = globalThis.setInterval(() => {
       characterIndex += 1;
       typedMessage = welcomeMessage.slice(0, characterIndex);
 
       if (characterIndex === welcomeMessage.length) {
-        window.clearInterval(typeTimer);
+        globalThis.clearInterval(typeTimer);
 
-        continuePromptTimer = window.setTimeout(() => {
+        continuePromptTimer = globalThis.setTimeout(() => {
           isContinuePromptVisible = true;
         }, continuePromptDelayMs);
       }
     }, typeDelayMs);
 
-    window.addEventListener('keydown', finishIntro);
-    window.addEventListener('pointerdown', finishIntro);
+    document.addEventListener('keydown', finishIntro);
+    document.addEventListener('pointerdown', finishIntro);
 
     return () => {
-      window.clearInterval(typeTimer);
+      globalThis.clearInterval(typeTimer);
 
       if (continuePromptTimer !== undefined) {
-        window.clearTimeout(continuePromptTimer);
+        globalThis.clearTimeout(continuePromptTimer);
       }
 
-      window.removeEventListener('keydown', finishIntro);
-      window.removeEventListener('pointerdown', finishIntro);
+      document.removeEventListener('keydown', finishIntro);
+      document.removeEventListener('pointerdown', finishIntro);
     };
   });
 </script>
@@ -71,5 +87,5 @@
     </div>
   </main>
 {:else}
-  <Desktop />
+  <Home />
 {/if}
