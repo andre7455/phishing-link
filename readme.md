@@ -44,10 +44,20 @@ This repo includes `AGENTS.md` as guidance for AI coding agents. Future AI chang
 src/
   components/  Reusable Svelte components
   routes/      Top-level page/route components
+  lib/         Shortcut discovery and shared content-session logic
+  styles/      Focused Tailwind component-style modules
+  content/
+    shortcuts/ Numbered markdown, PDF, and URL shortcut files
+  app.css      Tailwind entry point and ordered style imports
   App.svelte   App shell
   main.js      Browser entry point
 tests/         Vitest test files, excluded from Docker builds
 ```
+
+Desktop and mobile share shortcut discovery, icon rendering, content rendering,
+and the open/close/redirect logic in `src/lib/shortcutSession.js`. Each launcher has
+its own content session. Keep environment-specific layout in the route components
+and styling in the corresponding `src/styles/` modules, using Tailwind `@apply`.
 
 ## Shortcut content
 
@@ -81,8 +91,28 @@ PDFs open inside a resizable desktop frame or the mobile app view. The mobile Ho
 button returns to the launcher. A direct open/download link is provided because
 embedded PDF support varies by browser, especially on mobile.
 
+Plain-text `.url` files also generate shortcuts. For example, create
+`src/content/shortcuts/3-GitHub.url` containing only the destination:
+
+```txt
+https://github.com/your-name
+```
+
+URL shortcuts automatically load the destination site's `/favicon.ico` on desktop,
+mobile, and in the Start menu. If it fails to load, the matching local PNG at
+`public/assets/shortcut-icons/3-GitHub.png` is used as a fallback. Sites using only
+custom favicon paths need that local PNG. Icons are requested directly from the
+destination (no third-party service); visitors' browsers contact that site to load
+its icon, with no referrer sent. Root-relative links use this site's `/favicon.ico`.
+
+URL shortcuts share
+numeric ordering with markdown and PDFs and navigate the current browser tab on
+desktop and mobile (including from the Start menu). Root-relative destinations such
+as `/some-page` also work. Leading/trailing whitespace is ignored; empty files or
+files containing multiple URL lines are rejected. No metadata or `.ini` format is needed.
+
 Vite watches content during development; production content is bundled at build time,
-so newly added PDFs require a production rebuild before deployment.
+so newly added content files require a production rebuild before deployment.
 
 ## Startup preference
 

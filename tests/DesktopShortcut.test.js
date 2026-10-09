@@ -47,6 +47,28 @@ describe('DesktopShortcut', () => {
     expect(onMove).toHaveBeenCalledWith({ x: 66, y: 46 });
   });
 
+  it('cleans up dragging when cancelled or removed', async () => {
+    const onMove = vi.fn();
+    const onOpen = vi.fn();
+    const { unmount } = render(DesktopShortcut, {
+      props: { label: 'About me', iconPath, onMove, onOpen },
+    });
+    const shortcut = screen.getByRole('button', { name: 'Open About me' });
+    await fireEvent.pointerDown(shortcut, { clientX: 16, clientY: 16 });
+    await fireEvent.pointerCancel(document);
+    await fireEvent.pointerMove(document, { clientX: 66, clientY: 46 });
+    await fireEvent.pointerUp(document);
+    expect(onMove).not.toHaveBeenCalled();
+    expect(onOpen).not.toHaveBeenCalled();
+
+    await fireEvent.pointerDown(shortcut, { clientX: 16, clientY: 16 });
+    unmount();
+    await fireEvent.pointerMove(document, { clientX: 66, clientY: 46 });
+    await fireEvent.pointerUp(document);
+    expect(onMove).not.toHaveBeenCalled();
+    expect(onOpen).not.toHaveBeenCalled();
+  });
+
   it('opens on pointer press without dragging', async () => {
     const onOpen = vi.fn();
 

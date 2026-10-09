@@ -1,0 +1,33 @@
+@layer components {
+  .shortcut-content {
+    @apply h-full overflow-auto bg-white p-4 text-left font-sans text-sm leading-relaxed text-black;
+  }
+
+  .shortcut-content h1 {
+    @apply mb-4 text-2xl font-bold;
+  }
+
+  .shortcut-content h2 {
+    @apply mb-3 mt-5 text-xl font-bold;
+  }
+
+  .shortcut-content p {
+    @apply mb-3;
+  }
+
+  .shortcut-content a {
+    @apply text-blue-700 underline;
+  }
+
+  .shortcut-content img {
+    @apply my-4 max-w-full border border-black;
+  }
+
+  .shortcut-content code {
+    @apply bg-black/10 px-1 font-mono;
+  }
+
+  .shortcut-content pre {
+    @apply mb-4 overflow-auto bg-black/10 p-3;
+  }
+}

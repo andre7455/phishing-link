@@ -1,0 +1,61 @@
+@layer components {
+  .mobile-home {
+    @apply flex min-h-screen flex-col overflow-hidden bg-[#1d2b16] font-sans text-[#d7ffd0];
+  }
+
+  .mobile-status-bar {
+    @apply flex h-7 items-center justify-between bg-gradient-to-b from-[#263b1d] to-[#111b0d];
+    @apply border-b border-black px-2 text-xs text-[#d7ffd0];
+  }
+
+  .mobile-screen {
+    @apply flex min-h-0 flex-1 flex-col bg-gradient-to-b from-[#263f1c] via-[#162611] to-[#071006];
+    @apply px-4 py-5;
+  }
+
+  .mobile-clock {
+    @apply mt-2 text-center text-5xl font-light tracking-tight text-white;
+    @apply [text-shadow:0_2px_4px_rgb(0_0_0_/_0.7)];
+  }
+
+  .mobile-shortcut-grid {
+    @apply mt-10 grid grid-cols-4 gap-x-3 gap-y-6;
+  }
+
+  .mobile-shortcut-button {
+    @apply flex flex-col items-center gap-2 rounded p-1 text-xs text-white outline-none;
+    @apply active:bg-white/10 focus:bg-white/10;
+  }
+
+  .mobile-shortcut-icon {
+    @apply flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-white/20;
+    @apply bg-gradient-to-b from-[#6f8f2a] to-[#263f1c] text-2xl text-white;
+    @apply shadow-[inset_0_1px_rgb(255_255_255_/_0.35),0_2px_4px_rgb(0_0_0_/_0.5)];
+  }
+
+  .mobile-shortcut-label {
+    @apply max-w-full break-words text-center leading-tight;
+  }
+
+  .mobile-fullscreen-app {
+    @apply flex min-h-0 flex-1 flex-col overflow-hidden rounded border border-black bg-white;
+  }
+
+  .mobile-app-titlebar {
+    @apply flex h-8 items-center bg-gradient-to-b from-[#3f5f2a] to-[#172712] px-3;
+    @apply text-sm font-bold text-white;
+  }
+
+  .mobile-app-frame {
+    @apply min-h-0 flex-1 border-0 bg-white;
+  }
+
+  .mobile-nav-bar {
+    @apply grid h-12 grid-cols-3 border-t border-black bg-gradient-to-b from-[#1f1f1f] to-[#050505];
+  }
+
+  .mobile-nav-button {
+    @apply flex items-center justify-center border-x border-white/5 text-2xl text-[#d7ffd0];
+    @apply active:bg-white/10;
+  }
+}

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import ShortcutIcon from './ShortcutIcon.svelte';
 
   /** @type {import('../lib/shortcuts.js').Shortcut[]} */
   export let shortcuts = [];
@@ -57,7 +58,11 @@
       <div class="start-menu-items">
         {#each shortcuts as shortcut (shortcut.id)}
           <button class="start-menu-item" type="button" onclick={() => openShortcut(shortcut)}>
-            <img class="start-menu-item-icon" src={shortcut.iconPath} alt="" />
+            <ShortcutIcon
+              iconPath={shortcut.iconPath}
+              faviconPath={shortcut.faviconPath ?? null}
+              imageClass="start-menu-item-icon"
+            />
             <span>{shortcut.label}</span>
           </button>
         {/each}

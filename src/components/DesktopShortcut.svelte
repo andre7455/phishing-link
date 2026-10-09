@@ -1,6 +1,11 @@
 <script>
+  import { onDestroy } from 'svelte';
+  import ShortcutIcon from './ShortcutIcon.svelte';
+
   export let label;
   export let iconPath;
+  /** @type {string | null} */
+  export let faviconPath = null;
   export let variant = 'desktop';
   export let initialX = 16;
   export let initialY = 16;
@@ -34,11 +39,18 @@
     onMove({ x, y });
   };
 
+  const stopDragging = () => {
+    document.removeEventListener('pointermove', handlePointerMove);
+    document.removeEventListener('pointerup', handlePointerUp);
+    document.removeEventListener('pointercancel', stopDragging);
+  };
+
+  onDestroy(stopDragging);
+
   /** @param {PointerEvent} event */
   const handlePointerUp = (event) => {
     if (isDesktop) {
-      document.removeEventListener('pointermove', handlePointerMove);
-      document.removeEventListener('pointerup', handlePointerUp);
+      stopDragging();
     }
 
     if (!hasMoved) {
@@ -63,6 +75,7 @@
 
     document.addEventListener('pointermove', handlePointerMove);
     document.addEventListener('pointerup', handlePointerUp);
+    document.addEventListener('pointercancel', stopDragging);
     event.preventDefault();
   };
 
@@ -85,7 +98,7 @@
   onkeydown={handleKeyDown}
 >
   <span class={iconClass} aria-hidden="true">
-    <img class="shortcut-icon-image" src={iconPath} alt="" />
+    <ShortcutIcon {iconPath} {faviconPath} />
   </span>
   <span class={labelClass}>{label}</span>
 </button>

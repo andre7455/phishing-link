@@ -3,31 +3,13 @@
   import DesktopShortcut from '../components/DesktopShortcut.svelte';
   import StartMenuBar from '../components/StartMenuBar.svelte';
   import { shortcuts } from '../lib/shortcuts.js';
+  import { createShortcutSession } from '../lib/shortcutSession.js';
 
   const shortcutStartX = 16;
   const shortcutStartY = 16;
   const shortcutRowGap = 104;
 
-  /** @type {{ title: string, markdown: string, pdfUrl: string | null } | null} */
-  let openFrame = null;
-
-  /** @param {import('../lib/shortcuts.js').Shortcut} shortcut */
-  const openShortcut = (shortcut) => {
-    if (shortcut.redirect !== null) {
-      globalThis.location.href = shortcut.redirect;
-      return;
-    }
-
-    openFrame = {
-      title: shortcut.label,
-      markdown: shortcut.markdown,
-      pdfUrl: shortcut.pdfUrl ?? null,
-    };
-  };
-
-  const closeFrame = () => {
-    openFrame = null;
-  };
+  const { content: openFrame, open: openShortcut, close: closeFrame } = createShortcutSession();
 </script>
 
 <main class="desktop-page" aria-label="Desktop">
@@ -36,17 +18,18 @@
       <DesktopShortcut
         label={shortcut.label}
         iconPath={shortcut.iconPath}
+        faviconPath={shortcut.faviconPath ?? null}
         initialX={shortcutStartX}
         initialY={shortcutStartY + shortcutIndex * shortcutRowGap}
         onOpen={() => openShortcut(shortcut)}
       />
     {/each}
 
-    {#if openFrame !== null}
+    {#if $openFrame !== null}
       <DesktopFrame
-        title={openFrame.title}
-        markdown={openFrame.markdown}
-        pdfUrl={openFrame.pdfUrl}
+        title={$openFrame.title}
+        markdown={$openFrame.markdown}
+        pdfUrl={$openFrame.pdfUrl}
         onClose={closeFrame}
       />
     {/if}

@@ -1,0 +1,24 @@
+@layer components {
+  .terminal-intro-screen {
+    @apply flex min-h-screen bg-black p-6 font-mono text-2xl text-white;
+    @apply sm:items-center sm:justify-center sm:text-4xl;
+  }
+
+  .terminal-intro-content {
+    @apply mt-8 text-center sm:mt-0;
+  }
+
+  .terminal-typed-line {
+    @apply mx-auto flex min-w-[12ch] items-baseline whitespace-nowrap text-left;
+  }
+
+  .terminal-cursor {
+    @apply ml-1 inline-block h-7 w-3 animate-blink bg-white align-[-3px];
+    @apply sm:h-10 sm:w-4;
+  }
+
+  .terminal-continue-prompt {
+    @apply mt-8 min-h-6 text-base transition-opacity duration-300;
+    @apply sm:min-h-8 sm:text-2xl;
+  }
+}

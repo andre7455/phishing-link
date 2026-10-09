@@ -1,0 +1,62 @@
+@layer components {
+  .desktop-page {
+    @apply flex min-h-screen flex-col overflow-hidden bg-[#008080] font-sans text-white;
+  }
+
+  .desktop-workspace {
+    @apply relative min-h-0 flex-1 overflow-hidden p-4;
+  }
+
+  .desktop-shortcut {
+    @apply absolute flex w-24 cursor-default select-none flex-col items-center gap-2;
+    @apply rounded-sm border border-transparent p-2 text-center text-sm text-white outline-none;
+    @apply hover:border-white/40 hover:bg-white/10;
+    @apply focus:border-white focus:bg-blue-700/60;
+  }
+
+  .desktop-shortcut-icon {
+    @apply flex h-12 w-12 items-center justify-center overflow-hidden border-2 border-white bg-[#c0c0c0];
+    @apply text-3xl text-black shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+  }
+
+  .shortcut-icon-image {
+    @apply h-full w-full object-cover;
+  }
+
+  .desktop-shortcut-label {
+    @apply max-w-full break-words px-1 leading-tight [text-shadow:1px_1px_#000];
+  }
+
+  .desktop-frame {
+    @apply absolute left-2 top-2 flex max-h-[calc(100%-1rem)] max-w-[calc(100%-1rem)];
+    @apply flex-col border-2 border-black bg-[#c0c0c0] text-black;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080,4px_4px_0_rgb(0_0_0_/_0.35)];
+    @apply sm:left-32 sm:top-20 sm:max-h-[calc(100%-6rem)] sm:max-w-[calc(100%-10rem)];
+  }
+
+  .desktop-frame-fullscreen {
+    @apply inset-0 h-full max-h-full w-full max-w-full shadow-none;
+  }
+
+  .desktop-frame-titlebar {
+    @apply m-1 flex h-8 items-center justify-between bg-[#000080] px-2 text-white;
+  }
+
+  .desktop-frame-title {
+    @apply min-w-0 truncate text-sm font-bold;
+  }
+
+  .desktop-frame-actions {
+    @apply ml-2 flex shrink-0 gap-1;
+  }
+
+  .desktop-frame-action {
+    @apply flex h-6 w-6 items-center justify-center border-2 border-black bg-[#c0c0c0];
+    @apply text-base font-bold leading-none text-black;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+  }
+
+  .desktop-frame-body {
+    @apply m-1 mt-0 min-h-0 flex-1 overflow-auto border-2 border-black bg-white;
+  }
+}

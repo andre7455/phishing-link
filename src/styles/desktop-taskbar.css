@@ -1,0 +1,55 @@
+@layer components {
+  .desktop-frame-resize-handle {
+    @apply absolute bottom-0 right-0 h-4 w-4 cursor-nwse-resize bg-[#c0c0c0];
+    @apply border-l border-t border-[#808080];
+  }
+
+  .desktop-frame-resize-handle-hidden {
+    @apply hidden;
+  }
+
+  .start-menu-bar {
+    @apply relative flex h-11 items-center gap-2 border-t-2 border-white bg-[#c0c0c0] px-1;
+    @apply text-sm text-black shadow-[inset_0_1px_#dfdfdf];
+  }
+
+  .start-menu-panel {
+    @apply absolute bottom-11 left-0 z-20 flex w-64 border-2 border-black bg-[#c0c0c0];
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080,4px_4px_0_rgb(0_0_0_/_0.35)];
+  }
+
+  .start-menu-header {
+    @apply flex w-9 items-end justify-center bg-[#000080] pb-3 text-sm font-bold text-white;
+    @apply [writing-mode:vertical-rl] [transform:rotate(180deg)];
+  }
+
+  .start-menu-items {
+    @apply min-w-0 flex-1 p-1;
+  }
+
+  .start-menu-item {
+    @apply flex w-full items-center gap-3 p-2 text-left outline-none;
+    @apply hover:bg-[#000080] hover:text-white focus:bg-[#000080] focus:text-white;
+  }
+
+  .start-menu-item-icon {
+    @apply h-8 w-8 border border-black object-cover;
+  }
+
+  .start-button {
+    @apply flex h-8 items-center gap-2 border-2 border-black bg-[#c0c0c0] px-3 font-bold;
+    @apply shadow-[inset_1px_1px_#fff,inset_-1px_-1px_#808080];
+    @apply active:translate-y-px active:shadow-[inset_1px_1px_#808080];
+  }
+
+  .taskbar-spacer {
+    @apply h-8 min-w-0 flex-1 border border-[#808080] bg-[#b8b8b8];
+    @apply shadow-[inset_1px_1px_#808080,inset_-1px_-1px_#dfdfdf];
+  }
+
+  .taskbar-clock {
+    @apply flex h-9 min-w-24 flex-col items-center justify-center border border-[#808080];
+    @apply px-3 text-xs leading-tight;
+    @apply shadow-[inset_1px_1px_#808080,inset_-1px_-1px_#fff];
+  }
+}
