@@ -49,6 +49,47 @@ src/
 tests/         Vitest test files, excluded from Docker builds
 ```
 
+## Shortcut content
+
+Add markdown files in `src/content/shortcuts/` named `<number>-<Name>.md`.
+The number controls ordering; the name becomes the shortcut label on desktop and mobile.
+Put the matching PNG in `public/assets/shortcut-icons/`, for example
+`1-About me.md` uses `1-About me.png`.
+
+Markdown images use root-relative asset URLs:
+
+```md
+![Photo](/assets/pictures/photo.png)
+```
+
+To redirect a shortcut instead of opening markdown content, add this at the top of its file:
+
+```md
+---
+redirect: https://example.com
+---
+```
+
+Root-relative destinations such as `/some-page` also work, but that destination must exist.
+Redirects navigate the current browser tab on both desktop and mobile.
+
+PDF files also automatically generate shortcuts. Drop a file such as `2-CV.pdf`
+into `src/content/shortcuts/` and its matching `2-CV.png` icon into
+`public/assets/shortcut-icons/`. PDFs and markdown share the same numeric ordering.
+
+PDFs open inside a resizable desktop frame or the mobile app view. The mobile Home
+button returns to the launcher. A direct open/download link is provided because
+embedded PDF support varies by browser, especially on mobile.
+
+Vite watches content during development; production content is bundled at build time,
+so newly added PDFs require a production rebuild before deployment.
+
+## Startup preference
+
+After continuing past the intro, the `portfolioStartupSeen` cookie remembers that choice
+for one year. Later visits skip the animation. This is a preference cookie, not tracking.
+To replay the intro during development, delete that cookie in your browser's developer tools.
+
 ## Quality checks
 
 Run unit tests once:

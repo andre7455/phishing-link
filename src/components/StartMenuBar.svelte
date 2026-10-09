@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
+  /** @type {import('../lib/shortcuts.js').Shortcut[]} */
   export let shortcuts = [];
   /** @type {(shortcut: import('../lib/shortcuts.js').Shortcut) => void} */
   export let onOpenShortcut = () => {};

@@ -4,6 +4,12 @@ const shortcutModules = import.meta.glob('../content/shortcuts/*.md', {
   import: 'default',
 });
 
+const pdfModules = import.meta.glob('../content/shortcuts/*.pdf', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
 /**
  * @typedef {object} Shortcut
  * @property {string} id
@@ -12,9 +18,10 @@ const shortcutModules = import.meta.glob('../content/shortcuts/*.md', {
  * @property {string} markdown
  * @property {number} order
  * @property {string | null} redirect
+ * @property {string | null} [pdfUrl]
  */
 
-const shortcutFilePattern = /^(\d+)-(.+)\.md$/;
+const shortcutFilePattern = /^(\d+)-(.+)\.(md|pdf)$/;
 const frontmatterPattern = /^---\n([\s\S]*?)\n---\n?/;
 
 /** @param {string} value */
@@ -65,12 +72,16 @@ const parseShortcutPath = (path) => {
   };
 };
 
-/** @type {Shortcut[]} */
-export const shortcuts = Object.entries(shortcutModules)
+/**
+ * @param {Record<string, unknown>} modules
+ * @returns {Shortcut[]}
+ */
+export const createShortcuts = (modules) => Object.entries(modules)
   .map(([path, markdown]) => {
     const shortcut = parseShortcutPath(path);
-    const content = parseFrontmatter(String(markdown));
-    const iconPath = `/assets/shortcut-icons/${shortcut.fileName.replace(/\.md$/, '.png')}`;
+    const isPdf = shortcut.fileName.endsWith('.pdf');
+    const content = parseFrontmatter(isPdf ? '' : String(markdown));
+    const iconPath = `/assets/shortcut-icons/${shortcut.fileName.replace(/\.(md|pdf)$/, '.png')}`;
 
     return {
       id: shortcut.id,
@@ -79,6 +90,9 @@ export const shortcuts = Object.entries(shortcutModules)
       iconPath,
       markdown: content.markdown,
       redirect: content.redirect,
+      pdfUrl: isPdf ? String(markdown) : null,
     };
   })
   .sort((firstShortcut, secondShortcut) => firstShortcut.order - secondShortcut.order);
+
+export const shortcuts = createShortcuts({ ...shortcutModules, ...pdfModules });

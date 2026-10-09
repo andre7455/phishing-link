@@ -3,7 +3,7 @@
   import ShortcutContent from '../components/ShortcutContent.svelte';
   import { shortcuts } from '../lib/shortcuts.js';
 
-  /** @type {{ title: string, markdown: string } | null} */
+  /** @type {{ title: string, markdown: string, pdfUrl: string | null } | null} */
   let openApp = null;
 
   /** @param {import('../lib/shortcuts.js').Shortcut} shortcut */
@@ -16,6 +16,7 @@
     openApp = {
       title: shortcut.label,
       markdown: shortcut.markdown,
+      pdfUrl: shortcut.pdfUrl ?? null,
     };
   };
 
@@ -49,7 +50,7 @@
         <header class="mobile-app-titlebar">
           <span>{openApp.title}</span>
         </header>
-        <ShortcutContent markdown={openApp.markdown} />
+        <ShortcutContent markdown={openApp.markdown} pdfUrl={openApp.pdfUrl} />
       </section>
     {/if}
   </section>

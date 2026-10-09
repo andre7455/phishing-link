@@ -17,7 +17,12 @@
     .some((cookie) => cookie === `${startupCookieName}=${startupCookieValue}`);
 
   const setStartupCookie = () => {
-    document.cookie = `${startupCookieName}=${startupCookieValue}; max-age=31536000; path=/; SameSite=Lax`;
+    document.cookie = [
+      `${startupCookieName}=${startupCookieValue}`,
+      'max-age=31536000',
+      'path=/',
+      'SameSite=Lax',
+    ].join('; ');
   };
 
   onMount(() => {

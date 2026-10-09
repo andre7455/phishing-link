@@ -3,6 +3,8 @@
 
   export let title;
   export let markdown;
+  /** @type {string | null} */
+  export let pdfUrl = null;
   /** @type {() => void} */
   export let onClose = () => {};
 
@@ -85,7 +87,7 @@
   </header>
 
   <div class="desktop-frame-body">
-    <ShortcutContent {markdown} />
+    <ShortcutContent {markdown} {pdfUrl} />
   </div>
 
   <button

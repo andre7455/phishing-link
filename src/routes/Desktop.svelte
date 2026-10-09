@@ -8,7 +8,7 @@
   const shortcutStartY = 16;
   const shortcutRowGap = 104;
 
-  /** @type {{ title: string, markdown: string } | null} */
+  /** @type {{ title: string, markdown: string, pdfUrl: string | null } | null} */
   let openFrame = null;
 
   /** @param {import('../lib/shortcuts.js').Shortcut} shortcut */
@@ -21,6 +21,7 @@
     openFrame = {
       title: shortcut.label,
       markdown: shortcut.markdown,
+      pdfUrl: shortcut.pdfUrl ?? null,
     };
   };
 
@@ -42,7 +43,12 @@
     {/each}
 
     {#if openFrame !== null}
-      <DesktopFrame title={openFrame.title} markdown={openFrame.markdown} onClose={closeFrame} />
+      <DesktopFrame
+        title={openFrame.title}
+        markdown={openFrame.markdown}
+        pdfUrl={openFrame.pdfUrl}
+        onClose={closeFrame}
+      />
     {/if}
   </section>
   <StartMenuBar {shortcuts} onOpenShortcut={openShortcut} />
