@@ -1,16 +1,20 @@
 @layer components {
   .mobile-home {
-    @apply flex min-h-screen flex-col overflow-hidden bg-[#1d2b16] font-sans text-[#d7ffd0];
+    @apply relative flex flex-col overflow-hidden bg-[#1d2b16] font-sans text-[#d7ffd0];
+    height: 100vh;
+    height: 100dvh;
   }
 
   .mobile-status-bar {
     @apply flex h-7 items-center justify-between bg-gradient-to-b from-[#263b1d] to-[#111b0d];
-    @apply border-b border-black px-2 text-xs text-[#d7ffd0];
+    @apply shrink-0 border-b border-black px-2 text-xs text-[#d7ffd0];
+    padding-top: env(safe-area-inset-top, 0px);
+    height: calc(1.75rem + env(safe-area-inset-top, 0px));
   }
 
   .mobile-screen {
     @apply flex min-h-0 flex-1 flex-col bg-gradient-to-b from-[#263f1c] via-[#162611] to-[#071006];
-    @apply px-4 py-5;
+    @apply overflow-y-auto px-4 py-5;
   }
 
   .mobile-clock {
@@ -42,7 +46,7 @@
   }
 
   .mobile-app-titlebar {
-    @apply flex h-8 items-center bg-gradient-to-b from-[#3f5f2a] to-[#172712] px-3;
+    @apply flex h-8 shrink-0 items-center bg-gradient-to-b from-[#3f5f2a] to-[#172712] px-3;
     @apply text-sm font-bold text-white;
   }
 
@@ -51,7 +55,20 @@
   }
 
   .mobile-nav-bar {
-    @apply grid h-12 grid-cols-3 border-t border-black bg-gradient-to-b from-[#1f1f1f] to-[#050505];
+    @apply grid shrink-0 grid-cols-3 border-t border-black;
+    @apply bg-gradient-to-b from-[#1f1f1f] to-[#050505];
+    height: calc(3rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-app-menu {
+    @apply absolute inset-x-0 z-10 flex max-h-[60%] flex-col overflow-y-auto;
+    @apply border-t border-black bg-[#172712] p-2 text-left shadow-lg;
+    bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-app-menu button {
+    @apply rounded px-4 py-3 text-left hover:bg-white/10 focus:bg-white/10;
   }
 
   .mobile-nav-button {

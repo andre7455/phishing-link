@@ -106,7 +106,7 @@ destination (no third-party service); visitors' browsers contact that site to lo
 its icon, with no referrer sent. Root-relative links use this site's `/favicon.ico`.
 
 URL shortcuts share
-numeric ordering with markdown and PDFs and navigate the current browser tab on
+numeric ordering with markdown and PDFs and open a new browser tab on
 desktop and mobile (including from the Start menu). Root-relative destinations such
 as `/some-page` also work. Leading/trailing whitespace is ignored; empty files or
 files containing multiple URL lines are rejected. No metadata or `.ini` format is needed.

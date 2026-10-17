@@ -20,7 +20,11 @@ export const createShortcutSession = (navigate = (destination) => {
   /** @param {import('./shortcuts.js').Shortcut} shortcut */
   const open = (shortcut) => {
     if (shortcut.redirect !== null) {
-      navigate(shortcut.redirect);
+      if (shortcut.openInNewTab) {
+        globalThis.open(shortcut.redirect, '_blank', 'noopener,noreferrer');
+      } else {
+        navigate(shortcut.redirect);
+      }
       return;
     }
 

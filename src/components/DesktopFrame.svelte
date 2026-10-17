@@ -15,6 +15,7 @@
 
   let width = 672;
   let height = 420;
+  $: height = isContact ? 640 : 420;
   let startWidth = width;
   let startHeight = height;
   let resizeStartX = 0;

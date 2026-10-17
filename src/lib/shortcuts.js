@@ -27,6 +27,7 @@ const urlModules = import.meta.glob('../content/shortcuts/*.url', {
  * @property {string | null} redirect
  * @property {string | null} [pdfUrl]
  * @property {boolean} [isContact]
+ * @property {boolean} [openInNewTab]
  */
 
 const shortcutFilePattern = /^(\d+)-(.+)\.(md|pdf|url)$/;
@@ -116,7 +117,7 @@ export const createShortcuts = (modules) => Object.entries(modules)
       label: shortcut.label,
       order: shortcut.order,
       iconPath,
-      ...(isUrl ? { faviconPath: getFaviconPath(destination) } : {}),
+      ...(isUrl ? { faviconPath: getFaviconPath(destination), openInNewTab: true } : {}),
       markdown: content.markdown,
       redirect: isUrl ? destination : content.redirect,
       pdfUrl: isPdf ? String(markdown) : null,

@@ -13,6 +13,7 @@ describe('URL shortcuts', () => {
       order: 3,
       iconPath: '/assets/shortcut-icons/3-GitHub.png',
       faviconPath: 'https://github.com/favicon.ico',
+      openInNewTab: true,
       redirect: 'https://github.com/example?tab=repositories',
       markdown: '',
       pdfUrl: null,

@@ -28,6 +28,9 @@ describe('Desktop', () => {
     await fireEvent.pointerUp(document, { clientX: 16, clientY: 16 });
 
     expect(screen.getByLabelText('About me desktop frame')).toBeInTheDocument();
-    expect(screen.getByText('Welcome to my portfolio desktop.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'About me' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'André van der Lugt' })).toHaveAttribute(
+      'src', '/assets/pictures/TALENTENTUIN_PHOTO--104.jpg',
+    );
   });
 });

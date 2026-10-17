@@ -15,6 +15,20 @@ afterEach(() => {
 });
 
 describe('DesktopFrame', () => {
+  it('opens the contact form in a taller window, including when switching content', async () => {
+    const { rerender } = render(DesktopFrame, {
+      props: { title: 'Contact me', markdown: '', isContact: true },
+    });
+    expect(screen.getByLabelText('Contact me desktop frame')).toHaveStyle({ height: '640px' });
+    expect(screen.getByRole('heading', { name: 'Contact me' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send message' })).toBeInTheDocument();
+
+    await rerender({ title: 'About me', markdown, isContact: false });
+    expect(screen.getByLabelText('About me desktop frame')).toHaveStyle({ height: '420px' });
+
+    await rerender({ title: 'Contact me', markdown: '', isContact: true });
+    expect(screen.getByLabelText('Contact me desktop frame')).toHaveStyle({ height: '640px' });
+  });
   it('renders a desktop frame with markdown content', () => {
     render(DesktopFrame, {
       props: {

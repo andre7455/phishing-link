@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createShortcutSession } from '../src/lib/shortcutSession.js';
 import { createShortcuts } from '../src/lib/shortcuts.js';
+
+afterEach(() => vi.restoreAllMocks());
 
 describe('shortcut sessions', () => {
   it('opens markdown and PDF content and clears content when closed', () => {
@@ -19,7 +21,8 @@ describe('shortcut sessions', () => {
     expect(get(session.content)).toBeNull();
   });
 
-  it('navigates URL and markdown redirects without opening content', () => {
+  it('opens URL shortcuts in new tabs while markdown redirects stay in the current tab', () => {
+    const openTab = vi.spyOn(globalThis, 'open').mockReturnValue(null);
     const navigate = vi.fn();
     const session = createShortcutSession(navigate);
     const shortcuts = createShortcuts({
@@ -27,8 +30,26 @@ describe('shortcut sessions', () => {
       '/content/2-Local.md': '---\nredirect: /some-page\n---\n',
     });
     shortcuts.forEach(session.open);
-    expect(navigate.mock.calls).toEqual([['https://example.com'], ['/some-page']]);
+    expect(openTab).toHaveBeenCalledExactlyOnceWith(
+      'https://example.com', '_blank', 'noopener,noreferrer',
+    );
+    expect(navigate.mock.calls).toEqual([['/some-page']]);
     expect(get(session.content)).toBeNull();
+  });
+
+  it('keeps existing content open when launching a URL shortcut', () => {
+    const openTab = vi.spyOn(globalThis, 'open').mockReturnValue(null);
+    const session = createShortcutSession();
+    const [markdown, url] = createShortcuts({
+      '/content/1-About.md': '# About',
+      '/content/2-Website.url': '/some-page',
+    });
+    session.open(markdown);
+    session.open(url);
+    expect(openTab).toHaveBeenCalledExactlyOnceWith(
+      '/some-page', '_blank', 'noopener,noreferrer',
+    );
+    expect(get(session.content)?.title).toBe('About');
   });
 
   it('keeps desktop and mobile sessions independent', () => {
