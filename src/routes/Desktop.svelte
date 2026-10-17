@@ -7,7 +7,7 @@
 
   const shortcutStartX = 16;
   const shortcutStartY = 16;
-  const shortcutRowGap = 104;
+  const shortcutRowGap = 120;
 
   const { content: openFrame, open: openShortcut, close: closeFrame } = createShortcutSession();
 </script>

@@ -93,6 +93,7 @@
   style={shortcutStyle}
   type="button"
   aria-label={`Open ${label}`}
+  title={isDesktop ? label : undefined}
   onpointerdown={handlePointerDown}
   onpointerup={isDesktop ? undefined : handlePointerUp}
   onkeydown={handleKeyDown}

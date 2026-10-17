@@ -9,6 +9,17 @@ afterEach(() => {
 });
 
 describe('DesktopShortcut', () => {
+  it('keeps the full name accessible and in a tooltip for long desktop labels', async () => {
+    const label = 'A very long shortcut name that wraps onto multiple lines';
+    const onOpen = vi.fn();
+    render(DesktopShortcut, { props: { label, iconPath, onOpen } });
+    const shortcut = screen.getByRole('button', { name: `Open ${label}` });
+
+    expect(shortcut).toHaveAttribute('title', label);
+    expect(screen.getByText(label)).toHaveClass('desktop-shortcut-label');
+    await fireEvent.keyDown(shortcut, { key: 'Enter' });
+    expect(onOpen).toHaveBeenCalledOnce();
+  });
   it('renders a desktop shortcut button with label and icon image', () => {
     render(DesktopShortcut, {
       props: {

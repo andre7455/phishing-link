@@ -24,7 +24,8 @@
   }
 
   .desktop-shortcut-label {
-    @apply max-w-full break-words px-1 leading-tight [text-shadow:1px_1px_#000];
+    @apply line-clamp-2 w-full min-w-0 break-words px-1 leading-tight;
+    @apply [text-shadow:1px_1px_#000];
   }
 
   .desktop-frame {
