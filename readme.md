@@ -47,6 +47,7 @@ src/
   lib/         Shortcut discovery and shared content-session logic
   styles/      Focused Tailwind component-style modules
   content/
+    assets/    Pictures and shortcut icons
     shortcuts/ Numbered markdown, PDF, and URL shortcut files
   app.css      Tailwind entry point and ordered style imports
   App.svelte   App shell
@@ -63,8 +64,13 @@ and styling in the corresponding `src/styles/` modules, using Tailwind `@apply`.
 
 Add markdown files in `src/content/shortcuts/` named `<number>-<Name>.md`.
 The number controls ordering; the name becomes the shortcut label on desktop and mobile.
-Put the matching PNG in `public/assets/shortcut-icons/`, for example
+Put the matching PNG in `src/content/assets/shortcut-icons/`, for example
 `1-About me.md` uses `1-About me.png`.
+
+Assets live in `src/content/assets/`, next to the shortcut content. The
+`public/assets` symlink points to that directory so Vite serves and copies them
+at the existing `/assets/` URLs. Keep the symlink when checking out or deploying
+the project; edit the actual files under `src/content/assets/`.
 
 Markdown images use root-relative asset URLs:
 
@@ -85,7 +91,7 @@ Redirects navigate the current browser tab on both desktop and mobile.
 
 PDF files also automatically generate shortcuts. Drop a file such as `2-CV.pdf`
 into `src/content/shortcuts/` and its matching `2-CV.png` icon into
-`public/assets/shortcut-icons/`. PDFs and markdown share the same numeric ordering.
+`src/content/assets/shortcut-icons/`. PDFs and markdown share the same numeric ordering.
 
 PDFs open inside a resizable desktop frame or the mobile app view. The mobile Home
 button returns to the launcher. A direct open/download link is provided because
@@ -100,7 +106,7 @@ https://github.com/your-name
 
 URL shortcuts automatically load the destination site's `/favicon.ico` on desktop,
 mobile, and in the Start menu. If it fails to load, the matching local PNG at
-`public/assets/shortcut-icons/3-GitHub.png` is used as a fallback. Sites using only
+`src/content/assets/shortcut-icons/3-GitHub.png` is used as a fallback. Sites using only
 custom favicon paths need that local PNG. Icons are requested directly from the
 destination (no third-party service); visitors' browsers contact that site to load
 its icon, with no referrer sent. Root-relative links use this site's `/favicon.ico`.
