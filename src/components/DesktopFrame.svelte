@@ -4,6 +4,7 @@
 
   export let title;
   export let markdown;
+  export let isContact = false;
   /** @type {string | null} */
   export let pdfUrl = null;
   /** @type {() => void} */
@@ -157,7 +158,7 @@
   </header>
 
   <div class="desktop-frame-body" class:pointer-events-none={isDragging}>
-    <ShortcutContent {markdown} {pdfUrl} />
+    <ShortcutContent {markdown} {pdfUrl} {isContact} />
   </div>
 
   <button

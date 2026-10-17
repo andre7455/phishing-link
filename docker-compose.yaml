@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        VITE_CONTACT_URL: ${CONTACTFORM_URL:-}
     ports:
       - "80:80"
     restart: unless-stopped

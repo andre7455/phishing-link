@@ -9,7 +9,8 @@ FROM node:22-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+ARG VITE_CONTACT_URL=""
+RUN VITE_CONTACT_URL="$VITE_CONTACT_URL" npm run build
 
 FROM nginx:1.27-alpine AS runtime
 COPY nginx.conf /etc/nginx/conf.d/default.conf

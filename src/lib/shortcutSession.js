@@ -5,6 +5,7 @@ import { writable } from 'svelte/store';
  * @property {string} title
  * @property {string} markdown
  * @property {string | null} pdfUrl
+ * @property {boolean} [isContact]
  */
 
 /**
@@ -27,6 +28,7 @@ export const createShortcutSession = (navigate = (destination) => {
       title: shortcut.label,
       markdown: shortcut.markdown,
       pdfUrl: shortcut.pdfUrl ?? null,
+      ...(shortcut.isContact ? { isContact: true } : {}),
     });
   };
 

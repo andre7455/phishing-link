@@ -1,8 +1,10 @@
 <!-- eslint-disable svelte/no-at-html-tags -->
 <script>
   import { marked } from 'marked';
+  import ContactForm from './ContactForm.svelte';
 
   export let markdown = '';
+  export let isContact = false;
   /** @type {string | null} */
   export let pdfUrl = null;
 
@@ -12,7 +14,9 @@
 </script>
 
 <article class="shortcut-content">
-  {#if pdfUrl !== null}
+  {#if isContact}
+    <ContactForm />
+  {:else if pdfUrl !== null}
     <a class="text-blue-700 underline" href={pdfUrl}>Open or download PDF</a>
     <iframe class="h-full min-h-96 w-full border-0" src={pdfUrl} title="PDF document"></iframe>
   {:else}

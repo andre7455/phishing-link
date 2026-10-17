@@ -26,6 +26,7 @@ const urlModules = import.meta.glob('../content/shortcuts/*.url', {
  * @property {number} order
  * @property {string | null} redirect
  * @property {string | null} [pdfUrl]
+ * @property {boolean} [isContact]
  */
 
 const shortcutFilePattern = /^(\d+)-(.+)\.(md|pdf|url)$/;
@@ -123,4 +124,15 @@ export const createShortcuts = (modules) => Object.entries(modules)
   })
   .sort((firstShortcut, secondShortcut) => firstShortcut.order - secondShortcut.order);
 
-export const shortcuts = createShortcuts({ ...shortcutModules, ...pdfModules, ...urlModules });
+export const shortcuts = [
+  ...createShortcuts({ ...shortcutModules, ...pdfModules, ...urlModules }),
+  {
+    id: 'contact-me',
+    label: 'Contact me',
+    iconPath: '/assets/shortcut-icons/contact-me.svg',
+    markdown: '',
+    order: 6,
+    redirect: null,
+    isContact: true,
+  },
+];

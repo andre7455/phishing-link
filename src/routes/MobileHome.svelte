@@ -33,7 +33,11 @@
         <header class="mobile-app-titlebar">
           <span>{$openApp.title}</span>
         </header>
-        <ShortcutContent markdown={$openApp.markdown} pdfUrl={$openApp.pdfUrl} />
+        <ShortcutContent
+          markdown={$openApp.markdown}
+          pdfUrl={$openApp.pdfUrl}
+          isContact={$openApp.isContact ?? false}
+        />
       </section>
     {/if}
   </section>

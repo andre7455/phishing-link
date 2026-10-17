@@ -30,6 +30,7 @@
         title={$openFrame.title}
         markdown={$openFrame.markdown}
         pdfUrl={$openFrame.pdfUrl}
+        isContact={$openFrame.isContact ?? false}
         onClose={closeFrame}
       />
     {/if}

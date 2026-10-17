@@ -170,7 +170,52 @@ The Dockerfile uses multiple stages: Node builds the Svelte app, then Nginx serv
 npm run prod
 ```
 
-The production container will be available at `http://localhost:81`.
+The production container will be available at `http://localhost` (port 80).
+
+### Contact form URL
+
+Pass the contact endpoint to Compose when building this site:
+
+```sh
+CONTACTFORM_URL='https://example.com/contact' docker compose up -d --build
+```
+
+Compose passes `CONTACTFORM_URL` to the Docker build as `VITE_CONTACT_URL`, which
+Vite embeds in the frontend. Rebuild to change it; a container restart alone is
+not enough. This URL is public, so do not put secrets in it. If omitted, the site
+still builds, but the form reports that no contact URL is configured.
+The endpoint must accept the form's JSON POST requests and allow this site's
+origin through CORS if hosted on another origin.
+
+For local development, use `VITE_CONTACT_URL='https://example.com/contact' npm run dev`.
+
+Your deployment script can accept the URL as its first argument and pass it only
+to this site's Compose command, without exporting it to the other site:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+contactformUrl="${1:?Usage: deploy.sh CONTACTFORM_URL}"
+
+gitRefresh() {
+    local dir="$1"
+    shift
+
+    git -C "$dir" fetch origin &&
+    git -C "$dir" reset --hard origin/main &&
+    git -C "$dir" clean -fd &&
+    (cd "$dir" && "$@" docker compose up -d --build)
+}
+
+gitRefresh /root/websites/phishing-link env CONTACTFORM_URL="$contactformUrl"
+gitRefresh /root/websites/Portfolio-Page env -u CONTACTFORM_URL
+```
+
+Run it as `./deploy.sh 'https://example.com/contact'`. The second invocation
+explicitly removes `CONTACTFORM_URL` from its environment. Both sites use
+`docker compose` (Compose v2). As in your original script, `reset --hard` and
+`clean -fd` discard local changes and untracked files in each checkout.
 
 Useful production commands:
 
